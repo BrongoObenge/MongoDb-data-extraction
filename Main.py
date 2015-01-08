@@ -7,13 +7,25 @@ import re
 mongoManager = MongoDbManager.MongoDbManager()
 client = mongoManager.openDb()
 
-coll =  client['Hardware']['hardware-collection']
+coll =  client['Hardware']['MEMORY']
 cursor =  coll.find()
-pattern = r"\"_id\":.ObjectId\(((.)+)\"\)"
+pattern = r'\"_id\":.ObjectId\(((.)+)\"\)'
+pattern1 = r"(\\\\r\\\\n)"
+pattern2 = r"(\\\\r\\\\n)"
+pattern3 = r"(\\\\u2022\W)"
+pattern4 = r'(\"\[\"\\?\"?)'
+pattern5 = r'(\"]\"?)'
+pattern6 = r'(\, })'
+pattern7 = r'(u\\)'
+pattern8 = r'(\"\"(?![,]))'
+pattern9 = r'(,\s,)'
+pattern10 = r'},\n]'
+pattern11 = r'(,\W\"Bijzonderheden\":.+)\}'
+pattern12 = r'("Golden\WSample")'
 try:
     location = sys.argv[1]
 except:
-    location = 'mongodb-dump.php'
+    location = 'mongodb-dumpMEMORY.php'
 f = open(location,'w')      #Needs to be .php extension for angularJS to interact with
 f.write("[")
 i = 0
@@ -23,11 +35,23 @@ while cursor.alive:
        line = line.replace("u\"", "\"")
        try:
            line =  re.sub(pattern, "" ,line)
+	   line =  re.sub(pattern1, "" ,line)
+	   line =  re.sub(pattern2, "" ,line)
+       	   line =  re.sub(pattern3, "" ,line)
+           line =  re.sub(pattern4, '"' ,line)
+           line =  re.sub(pattern5, '"' ,line)
+           line =  re.sub(pattern6, ' }' ,line)
+           line =  re.sub(pattern7, "" ,line)
+           line =  re.sub(pattern8, ", \n" ,line)
+           line =  re.sub(pattern9, "," ,line)
+           line =  re.sub(pattern10, "}\n]" ,line)
+	   line =  re.sub(pattern11, "}", line)
+           line =  re.sub(pattern12, "" , line)	 
        except:
            print "no"
            pass
        f.write(line + ",\n")
-   except:
+   except:	
        pass
 
 f.write("]")
