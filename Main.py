@@ -7,8 +7,10 @@ import re
 mongoManager = MongoDbManager.MongoDbManager()
 client = mongoManager.openDb()
 
-coll =  client['Hardware']['MEMORY']
+coll = client['Hardware']['MEMORY']
 cursor =  coll.find()
+collLength = coll.count()
+
 pattern = r'\"_id\":.ObjectId\(((.)+)\"\)'
 pattern1 = r"(\\\\r\\\\n)"
 pattern2 = r"(\\\\r\\\\n)"
@@ -26,33 +28,40 @@ try:
     location = sys.argv[1]
 except:
     location = 'mongodb-dumpMEMORY.php'
-f = open(location,'w')      #Needs to be .php extension for angularJS to interact with
+
+f = open(location, 'w')      #Needs to be .php extension for angularJS to interact with
 f.write("[")
-i = 0
+index = 0
 while cursor.alive:
+   index += 1
+
    try:
        line = str(cursor.next()).replace("\'", "\"")
        line = line.replace("u\"", "\"")
        try:
-           line =  re.sub(pattern, "" ,line)
-	   line =  re.sub(pattern1, "" ,line)
-	   line =  re.sub(pattern2, "" ,line)
-       	   line =  re.sub(pattern3, "" ,line)
-           line =  re.sub(pattern4, '"' ,line)
-           line =  re.sub(pattern5, '"' ,line)
-           line =  re.sub(pattern6, ' }' ,line)
-           line =  re.sub(pattern7, "" ,line)
-           line =  re.sub(pattern8, ", \n" ,line)
-           line =  re.sub(pattern9, "," ,line)
-           line =  re.sub(pattern10, "}\n]" ,line)
-	   line =  re.sub(pattern11, "}", line)
-           line =  re.sub(pattern12, "" , line)	 
+           line = re.sub(pattern, "", line)
+           line = re.sub(pattern1, "", line)
+           line = re.sub(pattern2, "", line)
+           line = re.sub(pattern3, "", line)
+           line = re.sub(pattern4, '"', line)
+           line = re.sub(pattern5, '"', line)
+           line = re.sub(pattern6, ' }', line)
+           line = re.sub(pattern7, "", line)
+           line = re.sub(pattern8, ", \n", line)
+           line = re.sub(pattern9, ",", line)
+           line = re.sub(pattern10, "}\n]", line)
+           line = re.sub(pattern11, "}", line)
+           line = re.sub(pattern12, "", line)
        except:
            print "no"
-           pass
-       f.write(line + ",\n")
+       if(index == collLength):
+            f.write(line + "\n")
+       else:
+            f.write(line + ",\n")
    except:	
        pass
+
+
 
 f.write("]")
 client.close()
