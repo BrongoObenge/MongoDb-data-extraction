@@ -21,7 +21,6 @@ pattern6 = r'(\, })'
 pattern7 = r'(u\\)'
 pattern8 = r'(\"\"(?![,]))'
 pattern9 = r'(,\s,)'
-pattern10 = r'},\n]'
 pattern11 = r'(,\W\"Bijzonderheden\":.+)\}'
 pattern12 = r'("Golden\WSample")'
 try:
@@ -49,7 +48,6 @@ while cursor.alive:
            line = re.sub(pattern7, "", line)
            line = re.sub(pattern8, ", \n", line)
            line = re.sub(pattern9, ",", line)
-           line = re.sub(pattern10, "}\n]", line)
            line = re.sub(pattern11, "}", line)
            line = re.sub(pattern12, "", line)
        except:
