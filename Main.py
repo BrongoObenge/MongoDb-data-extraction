@@ -28,8 +28,10 @@ for x in range(len(hardwarePool)):
     pattern7 = r'(u\\)'
     pattern8 = r'(\"\"(?![,]))'
     pattern9 = r'(,\s,)'
+    pattern10 = r'(\\\\xef)'
     pattern11 = r'(,\W\"Bijzonderheden\":.+)\}'
     pattern12 = r'("Golden\WSample")'
+    pattern13 = r'(D410",\W"",)'
     try:
         location = sys.argv[1]
     except:
@@ -55,8 +57,10 @@ for x in range(len(hardwarePool)):
                line = re.sub(pattern7, "", line)
                line = re.sub(pattern8, ", \n", line)
                line = re.sub(pattern9, ",", line)
+               line = re.sub(pattern10, "i", line)
                line = re.sub(pattern11, "}", line)
                line = re.sub(pattern12, "", line)
+               line = re.sub(pattern13, 'D410",', line)
            except:
                print "no"
            if(index == collLength):
