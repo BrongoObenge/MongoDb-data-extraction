@@ -11,6 +11,13 @@ mongoManager = MongoDbManager.MongoDbManager()
 client = mongoManager.openDb()
 
 hardwarePool = [
+    'GRAPHICSCARD',
+    'PROCESSOR',
+    'MEMORY',
+    'HDD',
+    'SSD',
+    'SOUNDCARD',
+    'OPTICALDRIVE',
     'PSU',
     'MOTHERBOARD',
     'CASE',
