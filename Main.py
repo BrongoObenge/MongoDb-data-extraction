@@ -85,7 +85,15 @@ for x in range(len(hardwarePool)):
     pat56 = r'(A\W1.8")'
     pat57 = r'(C\W2,5")'
     pat58 = r'(end\W1"\W)'
-    pat59 = r'(D\W2.5"\W)'
+    pat59 = r'(SSD\W2.5"\W\()'
+    pat60 = r'(C\W1.8"\WS)'
+    pat61 = r'(D\W2,5"\W)'
+    pat62 = r'(SATA2\W2.5"\W)'
+    pat63 = r'(SATA\W3.5"\W)'
+    pat64 = r'(SAS\W2.5"\W)'
+    pat65 = r'(IBM\W1.8"\W)'
+    pat66 = r'("HP\W2.5"\W)'
+    pat67 = r'(FDE\W2.5"\W)'
     try:
         location = sys.argv[1]
     except:
@@ -161,7 +169,15 @@ for x in range(len(hardwarePool)):
                    line = re.sub(pat56, 'A 1.8', line)
                    line = re.sub(pat57, 'C 2,5', line)
                    line = re.sub(pat58, 'end 1 ', line)
-                   line = re.sub(pat59, 'D 2,5 ', line)
+                   line = re.sub(pat59, 'SSD 2.5 (', line)
+                   line = re.sub(pat60, 'C 1.8 S', line)
+                   line = re.sub(pat61, 'D 2,5 ', line)
+                   line = re.sub(pat62, 'SATA2 2.5 ', line)
+                   line = re.sub(pat63, 'SATA 3.5 ', line)
+                   line = re.sub(pat64, 'SAS 2.5 ', line)
+                   line = re.sub(pat65, 'IBM 1.8 ', line)
+                   line = re.sub(pat66, '"HP 2.5 ', line)
+                   line = re.sub(pat67, 'FDE 2.5 ', line)
 
 
 
