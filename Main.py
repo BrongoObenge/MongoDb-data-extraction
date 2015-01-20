@@ -62,6 +62,30 @@ for x in range(len(hardwarePool)):
     pat33 = r'(0421342,5,\W")'
     pat34 = r'(jde",\W"Aan)'
     pat35 = r'(:\W""2.5")'
+    pat36 = r'(":\W"2.5"",)'
+    pat37 = r'(\W2,5"",)'
+    pat38 = r'(\W2.5"",)'
+    pat39 = r'(Intel 530 2,5"\W)'
+    pat40 = r'(Toshiba\W2.5"\W)'
+    pat41 = r'(DC\W2.5"\WS37)'
+    pat42 = r'("1,8"\WSlim")'
+    pat43 = r'(":\W"1.8"",)'
+    pat44 = r' 2.5"\WS'
+    pat45 = r' 2.5"\WM'
+    pat46 = r'(":\W"3.5"",)'
+    pat47 = r'(TA\W2.5"\W)'
+    pat48 = r'(\W\(2,5"\)",)'
+    pat49 = r'(\W\(1,8"\)",)'
+    pat50 = r'(6\W2,5"\W)'
+    pat51 = r'(S\W3.5"\W)'
+    pat52 = r'(s\W3.5"\W)'
+    pat53 = r'(end\W2.5"\W)'
+    pat54 = r'(C300\W2.5"\W)'
+    pat55 = r'(a\W1.8")'
+    pat56 = r'(A\W1.8")'
+    pat57 = r'(C\W2,5")'
+    pat58 = r'(end\W1"\W)'
+    pat59 = r'(D\W2.5"\W)'
     try:
         location = sys.argv[1]
     except:
@@ -113,6 +137,34 @@ for x in range(len(hardwarePool)):
                    line = re.sub(pat33, '0421342,5", "', line)
                    line = re.sub(pat34, 'jde, Aan', line)
                    line = re.sub(pat35, ': "2.5"', line)
+               if hardwarePool[x] == "SSD":
+                   line = re.sub(pat36, '": "2.5",', line)
+                   line = re.sub(pat37, ' 2,5",', line)
+                   line = re.sub(pat38, ' 2.5",', line)
+                   line = re.sub(pat39, 'Intel 530 2,5 ', line)
+                   line = re.sub(pat40, 'Toshiba 2.5 ', line)
+                   line = re.sub(pat41, 'DC 2.5 S37', line)
+                   line = re.sub(pat42, '"1,8 Slim"', line)
+                   line = re.sub(pat43, '": "1.8",', line)
+                   line = re.sub(pat44, ' 2.5 S', line)
+                   line = re.sub(pat45, ' 2.5 M', line)
+                   line = re.sub(pat46, '": "3.5",', line)
+                   line = re.sub(pat47, 'TA 2.5 ', line)
+                   line = re.sub(pat48, ' (2,5)", ', line)
+                   line = re.sub(pat49, ' (1,8)", ', line)
+                   line = re.sub(pat50, '6 2,5 ', line)
+                   line = re.sub(pat51, 'S 3.5 ', line)
+                   line = re.sub(pat52, 's 3.5 ', line)
+                   line = re.sub(pat53, 'end 2.5 ', line)
+                   line = re.sub(pat54, 'C300 2.5 ', line)
+                   line = re.sub(pat55, 'a 1.8', line)
+                   line = re.sub(pat56, 'A 1.8', line)
+                   line = re.sub(pat57, 'C 2,5', line)
+                   line = re.sub(pat58, 'end 1 ', line)
+                   line = re.sub(pat59, 'D 2,5 ', line)
+
+
+
            except:
                print "no"
            if(index == collLength):
